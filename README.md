@@ -5,9 +5,6 @@
 # 🌍 SceneVision
 
 ### AI-Based Scene Classification using Deep Learning
-
-# 🌍 SceneVision
-
 > **AI-Based Natural Scene Classification Web Application using TensorFlow, Keras, and Flask**
 
 SceneVision is a web-based Artificial Intelligence application capable of classifying natural scene images into six different categories using a Convolutional Neural Network (CNN). Users can upload an image, and the trained deep learning model will automatically predict the scene category along with the confidence score.
