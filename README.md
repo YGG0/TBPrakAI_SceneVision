@@ -2,9 +2,17 @@
   <img src="docs/assets/banner.png" alt="SceneVision Banner" width="100%">
 </p>
 
+<div align="center">
+
 # 🌍 SceneVision
 
-### AI-Based Scene Classification using Deep Learning
+### AI-Based Natural Scene Classification using Deep Learning
+
+An intelligent web application that classifies natural scene images using a Convolutional Neural Network (CNN) powered by TensorFlow and deployed with Flask.
+
+</div>
+
+---
 > **AI-Based Natural Scene Classification Web Application using TensorFlow, Keras, and Flask**
 
 SceneVision is a web-based Artificial Intelligence application capable of classifying natural scene images into six different categories using a Convolutional Neural Network (CNN). Users can upload an image, and the trained deep learning model will automatically predict the scene category along with the confidence score.
