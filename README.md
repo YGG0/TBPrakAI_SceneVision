@@ -38,6 +38,17 @@ An intelligent web application that classifies natural scene images using a Conv
 SceneVision is a web-based Artificial Intelligence application capable of classifying natural scene images into six different categories using a Convolutional Neural Network (CNN). Users can upload an image, and the trained deep learning model will automatically predict the scene category along with the confidence score.
 
 ---
+## 📑 Table of Contents
+
+- [📖 About](#-about)
+- [✨ Features](#-features)
+- [📸 Application Preview](#-application-preview)
+- [🧠 AI Workflow](#-ai-workflow)
+- [📂 Project Structure](#-project-structure)
+- [⚙️ Installation](#️-installation)
+- [🚀 Usage](#-usage)
+- [🛣️ Roadmap](#️-roadmap)
+- [👨‍💻 Author](#-author)
 
 ## 🚀 Features
 
