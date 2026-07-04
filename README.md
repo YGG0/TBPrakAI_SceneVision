@@ -13,6 +13,26 @@ An intelligent web application that classifies natural scene images using a Conv
 </div>
 
 ---
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python)
+
+![Flask](https://img.shields.io/badge/Flask-3.x-black?style=for-the-badge&logo=flask)
+
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange?style=for-the-badge&logo=tensorflow)
+
+![Keras](https://img.shields.io/badge/Keras-DeepLearning-red?style=for-the-badge&logo=keras)
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+</div>
+
+---
 > **AI-Based Natural Scene Classification Web Application using TensorFlow, Keras, and Flask**
 
 SceneVision is a web-based Artificial Intelligence application capable of classifying natural scene images into six different categories using a Convolutional Neural Network (CNN). Users can upload an image, and the trained deep learning model will automatically predict the scene category along with the confidence score.
