@@ -1,0 +1,113 @@
+{
+  "project": {
+    "name": "SceneVision",
+    "domain": "Deep Learning Computer Vision",
+    "task": "Image Classification",
+    "model": "Custom CNN",
+    "input_size": [
+      150,
+      150,
+      3
+    ],
+    "classes_count": 6,
+    "epochs_completed": 24
+  },
+  "dataset": {
+    "source_train": 14034,
+    "training": 11230,
+    "validation": 2804,
+    "testing": 3000,
+    "classes": {
+      "buildings": {
+        "train_source": 2191,
+        "test": 437
+      },
+      "forest": {
+        "train_source": 2271,
+        "test": 474
+      },
+      "glacier": {
+        "train_source": 2404,
+        "test": 553
+      },
+      "mountain": {
+        "train_source": 2512,
+        "test": 525
+      },
+      "sea": {
+        "train_source": 2274,
+        "test": 510
+      },
+      "street": {
+        "train_source": 2382,
+        "test": 501
+      }
+    }
+  },
+  "performance": {
+    "test_accuracy": 0.8733,
+    "test_loss": 0.3454,
+    "macro_f1": 0.87,
+    "weighted_f1": 0.87,
+    "best_class": "forest",
+    "best_class_f1": 0.98
+  },
+  "class_report": [
+    {
+      "name": "buildings",
+      "display": "Bangunan",
+      "precision": 0.83,
+      "recall": 0.87,
+      "f1": 0.85,
+      "support": 437
+    },
+    {
+      "name": "forest",
+      "display": "Hutan",
+      "precision": 0.97,
+      "recall": 0.98,
+      "f1": 0.98,
+      "support": 474
+    },
+    {
+      "name": "glacier",
+      "display": "Gletser",
+      "precision": 0.87,
+      "recall": 0.8,
+      "f1": 0.84,
+      "support": 553
+    },
+    {
+      "name": "mountain",
+      "display": "Gunung",
+      "precision": 0.81,
+      "recall": 0.85,
+      "f1": 0.83,
+      "support": 525
+    },
+    {
+      "name": "sea",
+      "display": "Laut",
+      "precision": 0.88,
+      "recall": 0.86,
+      "f1": 0.87,
+      "support": 510
+    },
+    {
+      "name": "street",
+      "display": "Jalan",
+      "precision": 0.89,
+      "recall": 0.88,
+      "f1": 0.88,
+      "support": 501
+    }
+  ],
+  "assets": {
+    "dataset_distribution": "assets/dataset_distribution.png",
+    "dataset_samples": "assets/dataset_samples.png",
+    "training_history": "assets/training_history.png",
+    "confusion_matrix": "assets/confusion_matrix.png",
+    "class_performance": "assets/class_performance.png",
+    "dataset_split": "assets/dataset_split.png"
+  }
+}

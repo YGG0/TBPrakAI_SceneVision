@@ -1,0 +1,18 @@
+{
+    "image_size": [
+        150,
+        150
+    ],
+    "channels": 3,
+    "normalization": "divide_by_255",
+    "accuracy": 0.8733333349227905,
+    "loss": 0.34538689255714417,
+    "classes": [
+        "buildings",
+        "forest",
+        "glacier",
+        "mountain",
+        "sea",
+        "street"
+    ]
+}

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <meta
+        name="description"
+        content="SceneVision — dashboard klasifikasi pemandangan berbasis Deep Learning Computer Vision."
+    >
+    <title>SceneVision | Ocean Intelligence Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+    <div class="page-noise" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <a class="brand" href="#overview">
+            <span class="brand-mark">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                    <path d="M8 45 24 17l10 16 7-10 15 22Z"></path>
+                    <path class="brand-wave" d="M11 49c8-5 15 5 23 0s14 4 20 0"></path>
+                </svg>
+            </span>
+
+            <span>
+                <strong>SceneVision</strong>
+                <small>Deep Learning Computer Vision</small>
+            </span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="Navigasi utama">
+            <a href="#overview" class="active">Overview</a>
+            <a href="#analytics">Analytics</a>
+            <a href="#prediction">Prediction</a>
+            <a href="#workflow">Workflow</a>
+        </nav>
+
+        <div class="topbar-actions">
+            <div id="modelStatus" class="model-pill checking">
+                <i></i>
+                <span>Memeriksa model</span>
+            </div>
+
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="Buka menu"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <aside id="mobileMenu" class="mobile-menu">
+        <a href="#overview">Overview</a>
+        <a href="#analytics">Analytics</a>
+        <a href="#prediction">Prediction</a>
+        <a href="#workflow">Workflow</a>
+    </aside>
+
+    <main>
+        <section id="overview" class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-grid-lines" aria-hidden="true"></div>
+
+            <div class="hero-rail">
+                <span>01</span>
+                <i></i>
+                <a href="#analytics" aria-label="Analytics"></a>
+                <a href="#prediction" aria-label="Prediction"></a>
+                <a href="#workflow" aria-label="Workflow"></a>
+                <b>04</b>
+            </div>
+
+            <div class="container hero-content">
+                <div class="hero-copy reveal">
+                    <div class="eyebrow">
+                        <span></span>
+                        AI SCENE INTELLIGENCE
+                    </div>
+
+                    <h1>
+                        Understand every
+                        <em>scene.</em>
+                    </h1>
+
+                    <p>
+                        SceneVision mempelajari pola visual untuk
+                        mengenali bangunan, hutan, gletser, gunung,
+                        laut, dan jalan dari sebuah gambar.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a
+                            class="button button-primary"
+                            href="#prediction"
+                        >
+                            Mulai Prediksi
+                            <span>↗</span>
+                        </a>
+
+                        <a
+                            class="button button-ghost"
+                            href="#analytics"
+                        >
+                            Lihat Hasil Model
+                        </a>
+                    </div>
+
+                    <div class="hero-mini-stats">
+                        <div>
+                            <strong
+                                data-counter="{{ analytics.performance.test_accuracy * 100 }}"
+                                data-decimals="2"
+                            >
+                                0
+                            </strong>
+                            <span>% test accuracy</span>
+                        </div>
+
+                        <div>
+                            <strong
+                                data-counter="{{ analytics.dataset.source_train }}"
+                                data-decimals="0"
+                            >
+                                0
+                            </strong>
+                            <span>gambar training source</span>
+                        </div>
+
+                        <div>
+                            <strong
+                                data-counter="{{ analytics.project.classes_count }}"
+                                data-decimals="0"
+                            >
+                                0
+                            </strong>
+                            <span>kelas pemandangan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-panels reveal">
+                    <article class="hero-panel featured">
+                        <span class="panel-index">01</span>
+
+                        <div class="panel-icon">◎</div>
+
+                        <h3>Model Overview</h3>
+
+                        <p>
+                            Custom CNN dengan empat blok konvolusi,
+                            batch normalization, dropout, dan softmax.
+                        </p>
+
+                        <dl>
+                            <div>
+                                <dt>Input</dt>
+                                <dd>150 × 150 RGB</dd>
+                            </div>
+                            <div>
+                                <dt>Output</dt>
+                                <dd>6 kelas</dd>
+                            </div>
+                        </dl>
+
+                        <a href="#workflow">
+                            Lihat arsitektur
+                            <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="hero-panel">
+                        <span class="panel-index">02</span>
+                        <div class="panel-icon">⌁</div>
+                        <h3>EDA Report</h3>
+                        <p>
+                            Distribusi kelas relatif seimbang dan
+                            mencakup 17.034 gambar train-validation-test.
+                        </p>
+                        <a href="#analytics">
+                            Buka EDA
+                            <span>→</span>
+                        </a>
+                    </article>
+
+                    <article class="hero-panel">
+                        <span class="panel-index">03</span>
+                        <div class="panel-icon">△</div>
+                        <h3>Evaluation</h3>
+                        <p>
+                            Forest menjadi kelas terbaik dengan F1-score
+                            {{ "%.0f"|format(analytics.performance.best_class_f1 * 100) }}%.
+                        </p>
+                        <a href="#evaluationPanel">
+                            Lihat evaluasi
+                            <span>→</span>
+                        </a>
+                    </article>
+                </div>
+            </div>
+
+            <div class="container class-dock reveal">
+                {% for item in analytics.class_report %}
+                <article class="class-chip">
+                    <img
+                        src="{{ url_for('static', filename='assets/class_' ~ item.name ~ '.webp') }}"
+                        alt="{{ item.display }}"
+                    >
+                    <span>{{ "%02d"|format(loop.index) }}</span>
+                    <div>
+                        <strong>{{ item.display }}</strong>
+                        <small>F1 {{ "%.0f"|format(item.f1 * 100) }}%</small>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <div class="hero-scroll">
+                <span>Scroll to explore</span>
+                <i></i>
+            </div>
+        </section>
+
+        <section class="stats-band">
+            <div class="container stats-grid">
+                <article>
+                    <span>Training</span>
+                    <strong
+                        data-counter="{{ analytics.dataset.training }}"
+                        data-decimals="0"
+                    >
+                        0
+                    </strong>
+                    <small>gambar</small>
+                </article>
+
+                <article>
+                    <span>Validation</span>
+                    <strong
+                        data-counter="{{ analytics.dataset.validation }}"
+                        data-decimals="0"
+                    >
+                        0
+                    </strong>
+                    <small>gambar</small>
+                </article>
+
+                <article>
+                    <span>Testing</span>
+                    <strong
+                        data-counter="{{ analytics.dataset.testing }}"
+                        data-decimals="0"
+                    >
+                        0
+                    </strong>
+                    <small>gambar</small>
+                </article>
+
+                <article>
+                    <span>Test Loss</span>
+                    <strong
+                        data-counter="{{ analytics.performance.test_loss }}"
+                        data-decimals="4"
+                    >
+                        0
+                    </strong>
+                    <small>categorical crossentropy</small>
+                </article>
+            </div>
+        </section>
+
+        <section id="analytics" class="section analytics-section">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <div>
+                        <span class="section-number">02</span>
+                        <div class="eyebrow dark">
+                            <span></span>
+                            MODEL INTELLIGENCE
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2>
+                            Dari dataset menuju
+                            <em>bukti performa.</em>
+                        </h2>
+
+                    </div>
+                </div>
+
+                <div class="analytics-shell reveal">
+                    <div class="analytics-tabs" role="tablist">
+                        <button
+                            class="analytics-tab active"
+                            data-tab="edaPanel"
+                            type="button"
+                        >
+                            <span>01</span>
+                            EDA & Dataset
+                        </button>
+
+                        <button
+                            class="analytics-tab"
+                            data-tab="trainingPanel"
+                            type="button"
+                        >
+                            <span>02</span>
+                            Training History
+                        </button>
+
+                        <button
+                            class="analytics-tab"
+                            data-tab="evaluationPanel"
+                            type="button"
+                        >
+                            <span>03</span>
+                            Evaluation
+                        </button>
+                    </div>
+
+                    <div
+                        id="edaPanel"
+                        class="analytics-panel active"
+                    >
+                        <div class="analytics-summary">
+                            <article>
+                                <span>Total Source Train</span>
+                                <strong>
+                                    {{ "{:,}".format(analytics.dataset.source_train) }}
+                                </strong>
+                            </article>
+
+                            <article>
+                                <span>Kelas Terbesar</span>
+                                <strong>Mountain</strong>
+                            </article>
+
+                            <article>
+                                <span>Rasio Min/Max</span>
+                                <strong>87,2%</strong>
+                            </article>
+                        </div>
+
+                        <div class="visual-grid">
+                            <figure class="visual-card large">
+                                <div class="visual-card-head">
+                                    <div>
+                                        <span>EDA / 01</span>
+                                        <h3>Distribusi kelas</h3>
+                                    </div>
+
+                                    <button
+                                        class="zoom-button"
+                                        data-image="{{ url_for('static', filename='assets/dataset_distribution.png') }}"
+                                        data-title="Distribusi Kelas Training"
+                                        type="button"
+                                    >
+                                        Perbesar
+                                    </button>
+                                </div>
+
+                                <img
+                                    src="{{ url_for('static', filename='assets/dataset_distribution.png') }}"
+                                    alt="Grafik distribusi kelas training"
+                                >
+
+                                <figcaption>
+                                    Seluruh kelas memiliki jumlah data
+                                    yang relatif berimbang.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="visual-card">
+                                <div class="visual-card-head">
+                                    <div>
+                                        <span>EDA / 02</span>
+                                        <h3>Dataset split</h3>
+                                    </div>
+                                </div>
+
+                                <img
+                                    src="{{ url_for('static', filename='assets/dataset_split.png') }}"
+                                    alt="Diagram pembagian dataset"
+                                >
+
+                                <figcaption>
+                                    Train, validation, dan testing
+                                    dipisahkan agar evaluasi objektif.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="visual-card full">
+                                <div class="visual-card-head">
+                                    <div>
+                                        <span>EDA / 03</span>
+                                        <h3>Sample setiap kelas</h3>
+                                    </div>
+
+                                    <button
+                                        class="zoom-button"
+                                        data-image="{{ url_for('static', filename='assets/dataset_samples.png') }}"
+                                        data-title="Sample Dataset"
+                                        type="button"
+                                    >
+                                        Perbesar
+                                    </button>
+                                </div>
+
+                                <img
+                                    src="{{ url_for('static', filename='assets/dataset_samples.png') }}"
+                                    alt="Contoh gambar setiap kelas"
+                                >
+
+                                <figcaption>
+                                    Sample memperlihatkan variasi warna,
+                                    tekstur, dan sudut pengambilan gambar.
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div
+                        id="trainingPanel"
+                        class="analytics-panel"
+                    >
+                        <div class="training-intro">
+                            <div>
+                                <span class="section-kicker">TRAINING SUMMARY</span>
+                                <h3>Training berhenti pada model terbaik.</h3>
+                                <p>
+                                    Early stopping, learning-rate reduction,
+                                    dan model checkpoint menjaga training
+                                    tetap stabil.
+                                </p>
+                            </div>
+
+                            <div class="training-badges">
+                                <span>24 epoch</span>
+                                <span>Adam 0.001</span>
+                                <span>Batch 32</span>
+                                <span>Checkpoint aktif</span>
+                            </div>
+                        </div>
+
+                        <figure class="visual-card full dark-card">
+                            <div class="visual-card-head">
+                                <div>
+                                    <span>TRAINING / 01</span>
+                                    <h3>Model accuracy & loss</h3>
+                                </div>
+
+                                <button
+                                    class="zoom-button"
+                                    data-image="{{ url_for('static', filename='assets/training_history.png') }}"
+                                    data-title="Training History"
+                                    type="button"
+                                >
+                                    Perbesar
+                                </button>
+                            </div>
+
+                            <img
+                                src="{{ url_for('static', filename='assets/training_history.png') }}"
+                                alt="Grafik training accuracy dan loss"
+                            >
+
+                            <figcaption>
+                                Kurva train dan validation semakin
+                                berdekatan pada akhir training.
+                            </figcaption>
+                        </figure>
+
+                        <div class="insight-grid">
+                            <article>
+                                <span>Insight 01</span>
+                                <h4>Learning rate turun</h4>
+                                <p>
+                                    ReduceLROnPlateau menurunkan learning
+                                    rate ketika validation loss stagnan.
+                                </p>
+                            </article>
+
+                            <article>
+                                <span>Insight 02</span>
+                                <h4>Tidak terjadi gap ekstrem</h4>
+                                <p>
+                                    Train dan validation accuracy berakhir
+                                    pada rentang yang berdekatan.
+                                </p>
+                            </article>
+
+                            <article>
+                                <span>Insight 03</span>
+                                <h4>Checkpoint dipakai</h4>
+                                <p>
+                                    Model yang digunakan pada web adalah
+                                    model dengan validation loss terbaik.
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div
+                        id="evaluationPanel"
+                        class="analytics-panel"
+                    >
+                        <div class="evaluation-grid">
+                            <figure class="visual-card">
+                                <div class="visual-card-head">
+                                    <div>
+                                        <span>EVALUATION / 01</span>
+                                        <h3>Confusion matrix</h3>
+                                    </div>
+
+                                    <button
+                                        class="zoom-button"
+                                        data-image="{{ url_for('static', filename='assets/confusion_matrix.png') }}"
+                                        data-title="Confusion Matrix"
+                                        type="button"
+                                    >
+                                        Perbesar
+                                    </button>
+                                </div>
+
+                                <img
+                                    src="{{ url_for('static', filename='assets/confusion_matrix.png') }}"
+                                    alt="Confusion matrix"
+                                >
+
+                                <figcaption>
+                                    Kesalahan terbesar terjadi antara
+                                    glacier dan mountain.
+                                </figcaption>
+                            </figure>
+
+                            <figure class="visual-card">
+                                <div class="visual-card-head">
+                                    <div>
+                                        <span>EVALUATION / 02</span>
+                                        <h3>Performa per kelas</h3>
+                                    </div>
+
+                                    <button
+                                        class="zoom-button"
+                                        data-image="{{ url_for('static', filename='assets/class_performance.png') }}"
+                                        data-title="Performa Model per Kelas"
+                                        type="button"
+                                    >
+                                        Perbesar
+                                    </button>
+                                </div>
+
+                                <img
+                                    src="{{ url_for('static', filename='assets/class_performance.png') }}"
+                                    alt="Grafik precision recall dan F1"
+                                >
+
+                                <figcaption>
+                                    Forest memiliki precision, recall,
+                                    dan F1-score tertinggi.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-copy">
+                                <span>CLASSIFICATION REPORT</span>
+
+                                <h3>
+                                    Detail performa
+                                    setiap kelas.
+                                </h3>
+
+                                <p>
+                                    Accuracy keseluruhan mencapai
+                                    {{ "%.2f"|format(analytics.performance.test_accuracy * 100) }}%
+                                    pada 3.000 gambar testing.
+                                </p>
+
+                                <div class="report-highlight">
+                                    <strong>
+                                        {{ "%.0f"|format(analytics.performance.best_class_f1 * 100) }}%
+                                    </strong>
+                                    <span>F1 kelas forest</span>
+                                </div>
+                            </div>
+
+                            <div class="report-table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Kelas</th>
+                                            <th>Precision</th>
+                                            <th>Recall</th>
+                                            <th>F1</th>
+                                            <th>Support</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% for item in analytics.class_report %}
+                                        <tr>
+                                            <td>
+                                                <img
+                                                    src="{{ url_for('static', filename='assets/class_' ~ item.name ~ '.webp') }}"
+                                                    alt=""
+                                                >
+                                                {{ item.display }}
+                                            </td>
+                                            <td>{{ "%.2f"|format(item.precision) }}</td>
+                                            <td>{{ "%.2f"|format(item.recall) }}</td>
+                                            <td>
+                                                <span
+                                                    class="score-pill"
+                                                    style="--score: {{ item.f1 * 100 }}%"
+                                                >
+                                                    {{ "%.2f"|format(item.f1) }}
+                                                </span>
+                                            </td>
+                                            <td>{{ item.support }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="prediction" class="section prediction-section">
+            <div class="prediction-background"></div>
+
+            <div class="container">
+                <div class="section-heading light reveal">
+                    <div>
+                        <span class="section-number">03</span>
+                        <div class="eyebrow">
+                            <span></span>
+                            LIVE INFERENCE
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2>
+                            Uji model dengan
+                            <em>gambar baru.</em>
+                        </h2>
+
+                        <p>
+                            Unggah gambar atau ambil foto langsung dari
+                            kamera. Model akan menampilkan confidence
+                            setiap kelas.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="prediction-workspace reveal">
+                    <div class="upload-module">
+                        <div class="module-head">
+                            <div>
+                                <span>INPUT IMAGE</span>
+                                <h3>Unggah gambar pemandangan</h3>
+                            </div>
+
+                            <span class="format-badge">
+                                JPG · PNG · WEBP · BMP
+                            </span>
+                        </div>
+
+                        <div
+                            id="dropZone"
+                            class="drop-zone"
+                            tabindex="0"
+                            role="button"
+                        >
+                            <input
+                                id="imageInput"
+                                type="file"
+                                accept=".jpg,.jpeg,.png,.webp,.bmp,image/*"
+                                hidden
+                            >
+
+                            <div id="dropEmpty" class="drop-empty">
+                                <div class="upload-orbit">
+                                    <span>↑</span>
+                                    <i></i>
+                                </div>
+
+                                <h4>Drop image here</h4>
+                                <p>
+                                    atau klik untuk memilih file
+                                    maksimal 8 MB
+                                </p>
+                            </div>
+
+                            <div id="previewState" class="preview-state hidden">
+                                <img
+                                    id="previewImage"
+                                    src=""
+                                    alt="Preview gambar"
+                                >
+                                <div class="preview-meta">
+                                    <span id="previewName">image.jpg</span>
+                                    <span id="previewSize">0 MB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="upload-actions">
+                            <button
+                                id="chooseButton"
+                                class="button button-primary"
+                                type="button"
+                            >
+                                Pilih Gambar
+                            </button>
+
+                            <button
+                                id="cameraButton"
+                                class="button button-ghost light-border"
+                                type="button"
+                            >
+                                Buka Kamera
+                            </button>
+
+                            <button
+                                id="removeButton"
+                                class="icon-button"
+                                type="button"
+                                disabled
+                                aria-label="Hapus gambar"
+                            >
+                                ×
+                            </button>
+                        </div>
+
+                        <button
+                            id="predictButton"
+                            class="analyze-button"
+                            type="button"
+                            disabled
+                        >
+                            <span id="predictText">Analisis Gambar</span>
+                            <i id="predictSpinner" class="spinner hidden"></i>
+                            <b>↗</b>
+                        </button>
+
+                        <p id="uploadError" class="upload-error hidden"></p>
+                    </div>
+
+                    <div class="result-module">
+                        <div class="module-head">
+                            <div>
+                                <span>MODEL OUTPUT</span>
+                                <h3>Hasil prediksi</h3>
+                            </div>
+
+                            <span class="live-badge">
+                                <i></i>
+                                Live model
+                            </span>
+                        </div>
+
+                        <div id="resultEmpty" class="result-empty">
+                            <div class="radar">
+                                <span></span>
+                                <i></i>
+                                <b></b>
+                            </div>
+
+                            <h4>Menunggu gambar</h4>
+
+                            <p>
+                                Hasil klasifikasi, confidence, dan
+                                ranking kelas akan tampil di sini.
+                            </p>
+                        </div>
+
+                        <div id="resultContent" class="result-content hidden">
+                            <div class="result-main">
+                                <div
+                                    id="resultIcon"
+                                    class="result-icon"
+                                >
+                                    🖼️
+                                </div>
+
+                                <div>
+                                    <span>Prediksi tertinggi</span>
+                                    <h4 id="resultTitle">—</h4>
+                                    <p id="resultDescription"></p>
+                                </div>
+
+                                <div class="confidence-ring">
+                                    <strong id="resultConfidence">0%</strong>
+                                    <span>confidence</span>
+                                </div>
+                            </div>
+
+                            <div class="result-meta-row">
+                                <span>
+                                    Inference
+                                    <strong id="inferenceTime">—</strong>
+                                </span>
+
+                                <span>
+                                    Input
+                                    <strong id="inputSize">—</strong>
+                                </span>
+                            </div>
+
+                            <div class="prediction-ranking">
+                                <div class="ranking-head">
+                                    <h5>Top 3 Prediction</h5>
+                                    <span>probability distribution</span>
+                                </div>
+
+                                <div
+                                    id="predictionList"
+                                    class="prediction-list"
+                                ></div>
+                            </div>
+
+                            <div class="result-suggestion">
+                                <span>Model suggestion</span>
+                                <p id="resultSuggestion"></p>
+                            </div>
+
+                            <button
+                                id="tryAgainButton"
+                                class="retry-button"
+                                type="button"
+                            >
+                                Analisis gambar lain
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="section workflow-section">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <div>
+                        <span class="section-number">04</span>
+                        <div class="eyebrow dark">
+                            <span></span>
+                            MACHINE LEARNING WORKFLOW
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2>
+                            Tujuh tahap dari data
+                            hingga <em>deployment.</em>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="workflow-line reveal">
+                    {% set workflow = [
+                        ("01", "Data Collection", "Dataset enam kelas diunggah dan diperiksa."),
+                        ("02", "EDA", "Distribusi, sample, dan kualitas data dianalisis."),
+                        ("03", "Preprocessing", "Resize 150×150, normalisasi, dan split data."),
+                        ("04", "Feature Engineering", "Augmentasi memperkaya variasi visual."),
+                        ("05", "Training", "Custom CNN dilatih dengan checkpoint."),
+                        ("06", "Evaluation", "Accuracy, F1, dan confusion matrix diperiksa."),
+                        ("07", "Deployment", "Model dipasang pada Flask untuk inference.")
+                    ] %}
+
+                    {% for number, title, description in workflow %}
+                    <article>
+                        <span>{{ number }}</span>
+                        <h3>{{ title }}</h3>
+                        <p>{{ description }}</p>
+                    </article>
+                    {% endfor %}
+                </div>
+
+                <div class="architecture-card reveal">
+                    <div>
+                        <span>MODEL ARCHITECTURE</span>
+                        <h3>Custom CNN — 4 convolution blocks</h3>
+                        <p>
+                            Arsitektur mengekstraksi fitur visual secara
+                            bertahap, lalu melakukan klasifikasi melalui
+                            dense layer dan softmax.
+                        </p>
+                    </div>
+
+                    <div class="architecture-flow">
+                        <span>150×150×3</span>
+                        <i>→</i>
+                        <span>Conv 32</span>
+                        <i>→</i>
+                        <span>Conv 64</span>
+                        <i>→</i>
+                        <span>Conv 128</span>
+                        <i>→</i>
+                        <span>Conv 256</span>
+                        <i>→</i>
+                        <span>Dense</span>
+                        <i>→</i>
+                        <span>Softmax 6</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <a class="brand footer-brand" href="#overview">
+                    <span class="brand-mark">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <path d="M8 45 24 17l10 16 7-10 15 22Z"></path>
+                            <path class="brand-wave" d="M11 49c8-5 15 5 23 0s14 4 20 0"></path>
+                        </svg>
+                    </span>
+
+                    <span>
+                        <strong>SceneVision</strong>
+                        <small>Deep Learning Computer Vision</small>
+                    </span>
+                </a>
+
+                <p>
+                    Klasifikasi pemandangan berbasis Flask,
+                    TensorFlow, dan Custom CNN.
+                </p>
+            </div>
+
+            <div>
+                <span>Notebook Source</span>
+                <strong>PRAK_AI_TB_TINGGAL_IMPROVE_DIKIT.ipynb</strong>
+            </div>
+
+            <div>
+                <span>Model Status</span>
+                <strong id="footerModelStatus">Checking...</strong>
+            </div>
+        </div>
+    </footer>
+
+    <div id="imageModal" class="modal">
+        <div class="modal-card image-modal-card">
+            <button
+                id="imageModalClose"
+                class="modal-close"
+                type="button"
+                aria-label="Tutup"
+            >
+                ×
+            </button>
+
+            <span id="modalImageTitle"></span>
+
+            <img
+                id="modalImage"
+                src=""
+                alt="Visual diperbesar"
+            >
+        </div>
+    </div>
+
+    <div id="cameraModal" class="modal">
+        <div class="modal-card camera-modal-card">
+            <button
+                id="cameraClose"
+                class="modal-close"
+                type="button"
+                aria-label="Tutup kamera"
+            >
+                ×
+            </button>
+
+            <span>LIVE CAMERA</span>
+            <h3>Ambil gambar pemandangan</h3>
+
+            <video
+                id="cameraVideo"
+                autoplay
+                playsinline
+            ></video>
+
+            <canvas id="cameraCanvas" hidden></canvas>
+
+            <button
+                id="captureButton"
+                class="button button-primary full-width"
+                type="button"
+            >
+                Ambil Foto
+            </button>
+
+            <p id="cameraError" class="camera-error"></p>
+        </div>
+    </div>
+
+    <script
+        src="{{ url_for('static', filename='js/app.js') }}"
+    ></script>
+</body>
+</html>
