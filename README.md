@@ -50,6 +50,16 @@ SceneVision is a web-based Artificial Intelligence application capable of classi
 - [🛣️ Roadmap](#️-roadmap)
 - [👨‍💻 Author](#-author)
 
+## 📖 About
+
+**SceneVision** is an AI-powered web application developed to classify natural scene images into six predefined categories using a Convolutional Neural Network (CNN).
+
+The system enables users to upload an image through a simple web interface. The uploaded image is processed by a trained TensorFlow model, which predicts the scene category and displays the confidence score.
+
+This project demonstrates the integration of **Deep Learning**, **Computer Vision**, and **Web Development** into a complete end-to-end application using Flask.
+
+---
+
 ## 🚀 Features
 
 - 📤 Upload image from local device
