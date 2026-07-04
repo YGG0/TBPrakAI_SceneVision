@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="docs/assets/banner.png" alt="SceneVision Banner" width="100%">
+</p>
+
+# 🌍 SceneVision
+
+### AI-Based Scene Classification using Deep Learning
+
 # 🌍 SceneVision
 
 > **AI-Based Natural Scene Classification Web Application using TensorFlow, Keras, and Flask**
